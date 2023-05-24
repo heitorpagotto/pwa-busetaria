@@ -1,0 +1,21 @@
+<div class="fieldset">
+  <div class="label_container">
+    <label title="{{label}}">{{label}}
+      <ng-container *ngIf="requiredFieldset">*</ng-container>
+    </label>
+  </div>
+  <div class="main_fieldset">
+    <div class="fieldset_content">
+      <div class="prefix">
+        <ng-content select="[prefix]"></ng-content>
+      </div>
+      <div class="d_contents">
+        <ng-content></ng-content>
+      </div>
+      <div class="suffix">
+        <ng-content select="[suffix]"></ng-content>
+      </div>
+    </div>
+    <span class="helper_text error" *ngIf="invalidFieldset">{{errorText}}</span>
+  </div>
+</div>
