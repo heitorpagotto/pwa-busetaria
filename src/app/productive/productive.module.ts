@@ -3,8 +3,9 @@ import {CommonModule} from '@angular/common';
 import {FieldsetComponent} from './components/fieldset/fieldset.component';
 import {ButtonComponent} from './components/button/button.component';
 import {RippleDirective} from './directives/ripple.directive';
+import {AutocompleteComponent} from './components/autocomplete/autocomplete.component';
 
-const components: any[] = [FieldsetComponent, ButtonComponent];
+const components: any[] = [FieldsetComponent, ButtonComponent, AutocompleteComponent];
 const directives: any[] = [
   RippleDirective
 ];
@@ -12,7 +13,7 @@ const directives: any[] = [
 @NgModule({
   declarations: [
     components,
-    directives
+    directives,
   ],
   imports: [
     CommonModule
