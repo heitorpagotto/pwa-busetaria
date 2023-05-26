@@ -1,7 +1,84 @@
-.auto_complete_panel {
+.auto_complete_wrapper {
+  display: contents;
+}
+
+.auto_complete_menu {
   position: absolute;
-  height: 500px;
-  width: 500px;
-  background-color: red;
-  z-index: 1000;
+  top: 0;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  max-height: 350px;
+  overflow: auto;
+  z-index: 1020;
+}
+
+.auto_complete_content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.auto_complete_content button {
+  display: flex;
+  padding: 0 1rem;
+  height: 48px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  width: 100%;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: 100ms ease;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.auto_complete_content button:hover {
+  background-color: #EEE;
+}
+
+.no_show_text {
+  text-align: center;
+  color: rgb(221, 45, 45);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.search_button {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--defaultGradient);
+  color: white;
+}
+
+input {
+  color: inherit;
+}
+
+.darkMode input {
+  color: white;
+  caret-color: white;
+}
+
+.darkMode input::placeholder {
+  color: #cecece;
+}
+
+.darkMode .search_button {
+  background: transparent;
 }

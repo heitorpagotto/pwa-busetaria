@@ -1,13 +1,20 @@
-<div class="d_flex align_items_center w_100">
-  <input type="text" class="flex_1" (focus)="openMenu()">
-  <i class="bi bi-search" *ngIf="hasIcon"></i>
-</div>
+<p-fieldset [label]="fieldsetLabel" [class.darkMode]="darkMode">
+  <input [ngModel]="searchValue" (ngModelChange)="searchAutoComplete($event)" type="text" (focus)="openMenu()" #fieldset
+         placeholder="{{fielsetPlaceholder}}">
+</p-fieldset>
 
-<div class="auto_complete_panel" *ngIf="showPanel">
-  <div>
-    <ng-content select="p-autocomplete-option"></ng-content>
+<div class="auto_complete_wrapper" #menu>
+  <div *ngIf="isMenuOpen" class="auto_complete_menu elevation-p2" @openMenu>
+    <div class="auto_complete_content">
+      <button *ngFor="let option of dataArrayBackup" (click)="selectOption(option)">
+        {{option[showProp]}}
+      </button>
+      <span class="no_show_text" *ngIf="!dataArrayBackup || dataArrayBackup?.length === 0">
+        Não existem opções
+      </span>
+      <ng-container>
+        <ng-content></ng-content>
+      </ng-container>
+    </div>
   </div>
 </div>
-
-
-
