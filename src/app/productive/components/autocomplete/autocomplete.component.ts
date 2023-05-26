@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, Output, Renderer2} from '@angular/core';
 
 @Component({
   selector: 'app-autocomplete, p-autocomplete',
@@ -26,6 +26,31 @@ export class AutocompleteComponent {
 
   @Input()
   public hasIcon: boolean = false;
+
+  public showPanel: boolean = false;
+
+  constructor(private _renderer2: Renderer2) {
+  }
+
+  public openMenu(): void {
+    this.showPanel = true;
+    this._setBackdrop();
+  }
+
+  public closeMenu(): void {
+    this.showPanel = false;
+  }
+
+  private _setBackdrop(): void {
+    const backdrop: HTMLElement = this._renderer2.createElement('div');
+
+    backdrop.classList.add('backdrop');
+    backdrop.addEventListener('click', () => {
+      this.closeMenu();
+      backdrop.remove();
+    });
+    document.body.insertAdjacentElement('beforeend', backdrop);
+  }
 
   @HostBinding('class.d_contents')
   private get _defaultClass(): boolean {

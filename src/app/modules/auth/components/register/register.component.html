@@ -1,0 +1,32 @@
+<div class="main_container">
+  <div class="card">
+    <div class="card-header justify_between">
+      <button class="btn flat" [routerLink]="['/auth/login']" pRipple>
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      <h5>Cadastre-se na plataforma</h5>
+      <div></div>
+    </div>
+    <form *ngIf="registerForm" [formGroup]="registerForm">
+      <div class="card-content">
+        <div>
+          <p-fieldset label="Nome">
+            <input type="text" formControlName="userName">
+          </p-fieldset>
+          <p-fieldset label="Senha">
+            <input type="password" autocomplete="new-password" formControlName="passWord">
+          </p-fieldset>
+          <p-fieldset label="Email">
+            <input type="email" formControlName="email">
+          </p-fieldset>
+          <p-fieldset label="Telefone">
+            <input type="text" formControlName="phone">
+          </p-fieldset>
+        </div>
+        <button class="btn primary elevated w_100" pRipple>
+          Cadastre-se
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

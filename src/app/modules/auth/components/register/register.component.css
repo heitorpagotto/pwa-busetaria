@@ -3,10 +3,9 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  flex-direction: column;
 }
 
-.main_card {
+.card {
   width: 500px;
-  display: flex;
-  flex-direction: column;
 }

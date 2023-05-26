@@ -1,0 +1,7 @@
+.auto_complete_panel {
+  position: absolute;
+  height: 500px;
+  width: 500px;
+  background-color: red;
+  z-index: 1000;
+}

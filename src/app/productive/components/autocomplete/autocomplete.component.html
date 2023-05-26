@@ -1,9 +1,9 @@
 <div class="d_flex align_items_center w_100">
-  <input type="text" class="flex_1">
+  <input type="text" class="flex_1" (focus)="openMenu()">
   <i class="bi bi-search" *ngIf="hasIcon"></i>
 </div>
 
-<div>
+<div class="auto_complete_panel" *ngIf="showPanel">
   <div>
     <ng-content select="p-autocomplete-option"></ng-content>
   </div>
