@@ -23,7 +23,7 @@ export class RippleDirective implements AfterViewInit {
    * This option makes the ripple effect duration slower of faster, depending on the value in milliseconds;
    */
   @Input('pRippleDuration')
-  duration: number = 500;
+  duration: number = 220;
   /**
    * Changes the size of the ripple, and maintains it consistent independent of host element size;
    */

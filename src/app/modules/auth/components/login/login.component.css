@@ -12,6 +12,10 @@
 
 .sign_up_container {
   margin-top: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 .sign_up_container span {

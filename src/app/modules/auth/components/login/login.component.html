@@ -6,7 +6,7 @@
     <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="card-content d_flex flex_column">
         <div>
-          <p-fieldset label="Usuário">
+          <p-fieldset label="Usuário ou Email">
             <input type="text" placeholder="Digite..." formControlName="userName">
           </p-fieldset>
           <p-fieldset label="Senha">
@@ -18,10 +18,11 @@
         </button>
       </div>
     </form>
+    <div class="sign_up_container">
+      <span>Não possuí cadastro?</span>
+      <button class="btn secondary small" [routerLink]="['/auth/register']" pRipple>Cadastre-se</button>
+    </div>
   </div>
-  <div class="sign_up_container">
-    <span>Não possuí cadastro?</span>
-    <button class="btn secondary small" [routerLink]="['/auth/register']" pRipple>Cadastre-se</button>
-  </div>
+
 </div>
 
