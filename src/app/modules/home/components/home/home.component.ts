@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
   public nextPage(): void {
     if (this.selectedAddress) {
       if (this.selectedAddress.firstAddress !== this.selectedAddress.secondAddress) {
+        sessionStorage.setItem('addresses', JSON.stringify(this.selectedAddress));
         this._router.navigate(['/bus-line'])
       }
     }

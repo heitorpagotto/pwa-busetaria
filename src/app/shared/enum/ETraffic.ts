@@ -1,5 +1,5 @@
 export enum ETraffic {
-  BAD,
-  MEDIUM,
-  GOOD
+  BAD = 'BAD',
+  MEDIUM = 'MEDIUM',
+  GOOD = 'GOOD'
 }

@@ -14,7 +14,10 @@ export class AuthService {
     const usersString: string | null = sessionStorage.getItem('users');
     if (usersString) {
       const userParsed: UserModel[] = JSON.parse(usersString);
-      const idx = userParsed.findIndex(x => (x.name.includes(model.user) || x.email.includes(model.user)) && x.password == model.password)
+      const idx = userParsed.findIndex(x => (x.name.includes(model.userName) || x.email.includes(model.userName)) && x.password == model.passWord)
+      if (idx >= 0) {
+        sessionStorage.setItem('loggedUser', JSON.stringify(userParsed[idx]));
+      }
       return idx >= 0;
     }
     return false;

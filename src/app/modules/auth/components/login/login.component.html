@@ -1,7 +1,11 @@
 <div class="main_container">
   <div class="card">
-    <div class="card-header justify_center">
+    <div class="card-header justify_between">
+      <button class="btn flat" [routerLink]="['/']" pRipple>
+        <i class="bi bi-arrow-left"></i>
+      </button>
       <h5>Entrar na minha conta</h5>
+      <div></div>
     </div>
     <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="card-content d_flex flex_column">

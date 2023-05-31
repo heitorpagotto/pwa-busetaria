@@ -7,7 +7,7 @@
       <h5>Cadastre-se na plataforma</h5>
       <div></div>
     </div>
-    <form *ngIf="registerForm" [formGroup]="registerForm">
+    <form *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="card-content">
         <div>
           <p-fieldset label="Nome">
@@ -23,7 +23,7 @@
             <input type="text" formControlName="phone">
           </p-fieldset>
         </div>
-        <button class="btn primary elevated w_100" pRipple>
+        <button class="btn primary elevated w_100" pRipple type="submit">
           Cadastre-se
         </button>
       </div>

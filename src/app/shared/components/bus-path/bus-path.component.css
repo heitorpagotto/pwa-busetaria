@@ -1,0 +1,35 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 3rem 0;
+}
+
+.line {
+  border: 2px dashed black;
+}
+
+.destination_pin {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  right: -3rem;
+  top: 0;
+}
+
+.destination_pin span {
+  display: inline-block;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: calc(var(--default-font-size) + 2px);
+}
+
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-weight: 400;
+  font-size: calc(var(--default-font-size) - 2px);
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+}

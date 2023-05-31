@@ -2,5 +2,5 @@ import {ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot} from "@angul
 
 export const canActivateTeamLoggedIn: CanActivateFn =
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return !!localStorage.getItem('user_token');
+    return !!sessionStorage.getItem('loggedUser');
   };
