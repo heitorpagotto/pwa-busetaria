@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --default-font-size: 1rem;
+  --default-font-size: 16px;
   --h1-font-size: 54px;
   --h2-font-size: 48px;
   --h3-font-size: 40px;
@@ -347,7 +347,7 @@ span, p {
   left: 0;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 12px;
+  font-size: calc(var(--default-font-size) - 4px);
   animation: helperFadeIn 250ms cubic-bezier(0.3, 0, 1, 1);
   letter-spacing: -0.5px;
 }
@@ -616,3 +616,150 @@ img {
     right: 0;
   }
 }
+
+/* #region Modal */
+.p-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  max-height: 100vh;
+  border-radius: 8px;
+  background-color: white;
+  transform: translateY(-50%) translateX(-50%);
+  box-sizing: border-box;
+  max-width: 60%;
+}
+
+.p-modal .modal-header,
+.p-modal .modal-footer {
+  display: flex;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.p-modal .modal-content {
+  padding: 1rem 0.75rem;
+  box-sizing: border-box;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.p-modal.large {
+  width: 90%;
+  max-width: 90%;
+}
+
+.p-modal.small {
+  width: 30%;
+}
+
+.modal.bottom-sheet {
+  top: 100%;
+  transform: translateY(-100%) translateX(-50%) scale(1);
+  border-radius: 5px 5px 0 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .modal {
+    max-width: 80%;
+  }
+
+  .modal.small {
+    max-width: 60%;
+  }
+}
+
+@media only screen and (max-height: 800px) {
+  .modal .modal-content {
+    max-height: 60vh;
+  }
+}
+
+@media only screen and (max-height: 325px) {
+  .modal .modal-content {
+    max-height: 35vh;
+  }
+}
+
+/* #endregion Modal */
+
+
+/*#region Snackbar*/
+.snack_success {
+  background-color: green;
+  color: white;
+}
+
+.snack_error {
+  background-color: var(--danger);
+  color: white;
+}
+
+.snack_warning {
+  background-color: #ffc400;
+  color: black;
+}
+
+.p-snackbar-wrapper {
+  position: fixed;
+  padding: 2rem;
+  width: 350px;
+  z-index: 1150;
+}
+
+.p-snackbar {
+  display: flex;
+  background-color: var(--complementary-background);
+  color: var(--main-text-color);
+  width: 100%;
+  min-height: 56px;
+  padding: 0.5rem .75rem;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  animation: enterAnimation 100ms linear;
+}
+
+.p-snackbar.leaving {
+  animation: leaveAnimation 150ms cubic-bezier(0, 0, 0.5, 1);
+}
+
+.p-snackbar span {
+  word-break: break-word;
+  padding-right: 0.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .p-snackbar-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@keyframes enterAnimation {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes leaveAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/*#endregion Snackbar*/

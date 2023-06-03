@@ -5,6 +5,7 @@ import {UserModel} from "../../../../shared/models/user.model";
   selector: 'app-main',
   template: `
     <div class="container">
+      <app-font-size-accessibility></app-font-size-accessibility>
       <nav class="navbar elevation-p2">
         <a class="btn flat small inverted">
           <img src="./../../../../../assets/img/busetaria-logo.png" alt="BUS Logo" width="50px">

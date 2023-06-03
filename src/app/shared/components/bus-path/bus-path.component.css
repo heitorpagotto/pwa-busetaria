@@ -10,6 +10,7 @@
 }
 
 .line {
+  position: relative;
   border: 1.75px dashed rgb(100, 100, 100);
 }
 
@@ -20,14 +21,14 @@
   justify-content: center;
   align-items: center;
   top: 50%;
-  right: 0;
+  right: -58px;
   z-index: 0;
   transform: translateY(-58%);
 }
 
 .destination_pin img {
   position: relative;
-  right: -1.5rem;
+  right: 0;
   width: 50px;
 }
 
@@ -75,14 +76,14 @@
   padding: 0.25rem 0.5rem;
   border-radius: 8px;
   position: absolute;
-  bottom: -5px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .bus_wrapper {
   position: absolute;
-  top: 1rem;
+  top: -65px;
   right: 0;
   z-index: 1;
 }
@@ -94,6 +95,27 @@
 
 .bus_container {
   position: relative;
+}
+
+@media screen and (max-width: 1000px) {
+  .destination_pin {
+    right: 0 !important;
+  }
+
+  .destination_pin img {
+    right: -3.25rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .destination_pin img {
+    right: -1.8rem;
+    transform: scaleX(-1);
+  }
+
+  .wrapper {
+    padding: 5rem 0;
+  }
 }
 
 @keyframes updown {

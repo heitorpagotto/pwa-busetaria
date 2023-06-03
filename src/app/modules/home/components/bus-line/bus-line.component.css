@@ -10,7 +10,7 @@
   width: 250px;
   justify-content: space-between;
   align-items: center;
-  height: 250px;
+  min-height: 250px;
   margin-bottom: 1rem;
 }
 
@@ -27,6 +27,7 @@
 .info_card_footer span {
   font-size: calc(var(--default-font-size) + 4px);
   font-weight: 400;
+  text-align: center;
 }
 
 .main_wrapper {
@@ -84,7 +85,7 @@
 @media screen and (max-width: 768px) {
   .card_row .card {
     width: 200px;
-    height: 200px;
+    min-height: 200px;
   }
 
   .info_card_header span,

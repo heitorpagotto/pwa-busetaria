@@ -22,6 +22,7 @@ import {MsToTimePipe} from './pipes/ms-to-time.pipe';
   exports: [
     ProductiveModule,
     ReactiveFormsModule,
+    FontSizeAccessibilityComponent,
     MsToTimePipe,
     BusPathComponent,
     FormsModule

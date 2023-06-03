@@ -1,1 +1,27 @@
-<p>font-size-accessibility works!</p>
+<div class="accessibility_container">
+  <button role="button" class="font_size_wrapper" [pModalTrigger]="modal">
+    <i class="bi bi-universal-access-circle"></i>
+    A +/-
+  </button>
+</div>
+
+<p-modal #modal [pModalSize]="'large'" [pModalStatic]="true">
+  <p-modal-header class="justify_center">
+    <h4>Alterar tamanho da Fonte</h4>
+  </p-modal-header>
+  <p-modal-content>
+    <div class="d_flex">
+      <button class="font_size_control" style="margin-right: 1rem;" (click)="changeFontSize('add')">
+        <i class="bi bi-plus-lg"></i>
+        Aumentar
+      </button>
+      <button class="font_size_control" (click)="changeFontSize('subtract')">
+        <i class="bi bi-dash-lg"></i>
+        Diminuir
+      </button>
+    </div>
+  </p-modal-content>
+  <p-modal-footer class="justify_center">
+    <button class="btn primary elevated large" [pModalClose]="modal">Fechar</button>
+  </p-modal-footer>
+</p-modal>
