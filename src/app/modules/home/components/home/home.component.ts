@@ -1,7 +1,8 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {Component, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {AddressModel} from "../../../../shared/models/address.model";
 import {BusPageModel} from "../../../../shared/models/bus-page.model";
 import {Router} from "@angular/router";
+import {AutocompleteComponent} from "../../../../productive/components/autocomplete/autocomplete.component";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private _router: Router) {
   }
+
+  @ViewChild('firstAddress')
+  private _firstAddress: AutocompleteComponent;
+  @ViewChild('secondAddress')
+  private _secondAddress: AutocompleteComponent;
 
   @HostBinding('class.d_contents')
   private get _defaultClass(): boolean {
@@ -60,6 +66,12 @@ export class HomeComponent implements OnInit {
 
   public nextPage(): void {
     if (this.selectedAddress) {
+      if (!this.selectedAddress.firstAddress) {
+        this._firstAddress.model.control.markAllAsTouched();
+      }
+      if (!this.selectedAddress.secondAddress) {
+        this._secondAddress.model.control.markAllAsTouched();
+      }
       if (this.selectedAddress.firstAddress !== this.selectedAddress.secondAddress) {
         sessionStorage.setItem('addresses', JSON.stringify(this.selectedAddress));
         this._router.navigate(['/bus-line'])

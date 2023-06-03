@@ -11,16 +11,20 @@
       <div class="card-content">
         <div>
           <p-fieldset label="Nome">
-            <input type="text" formControlName="userName">
+            <input type="text" formControlName="userName" placeholder="Digite...">
+            <i class="bi bi-person-fill" suffix></i>
           </p-fieldset>
           <p-fieldset label="Senha">
-            <input type="password" autocomplete="new-password" formControlName="passWord">
+            <input type="password" autocomplete="new-password" placeholder="Digite..." formControlName="passWord">
+            <i class="bi bi-shield-lock-fill" suffix></i>
           </p-fieldset>
           <p-fieldset label="Email">
-            <input type="email" formControlName="email">
+            <input type="email" formControlName="email" placeholder="exemplo@exemplo.com.br">
+            <i class="bi bi-envelope-fill" suffix></i>
           </p-fieldset>
           <p-fieldset label="Telefone">
-            <input type="text" formControlName="phone">
+            <input type="text" formControlName="phone" placeholder="(00) 00000-0000">
+            <i class="bi bi-telephone-fill" suffix></i>
           </p-fieldset>
         </div>
         <button class="btn primary elevated w_100" pRipple type="submit">

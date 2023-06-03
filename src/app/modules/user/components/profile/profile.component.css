@@ -1,0 +1,41 @@
+.user_options_container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2rem;
+  justify-content: space-between;
+}
+
+.user_icon {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.user_icon i {
+  font-size: 4rem;
+}
+
+.input_container {
+  width: 500px;
+}
+
+.main_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .main_wrapper {
+    flex-direction: column;
+  }
+
+  .user_options_container {
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .input_container {
+    width: 100%;
+  }
+}

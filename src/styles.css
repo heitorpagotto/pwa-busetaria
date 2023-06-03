@@ -306,7 +306,7 @@ span, p {
   border: 0;
   outline: none;
   padding: 0 0.25rem;
-  font-size: 14px;
+  font-size: calc(var(--default-font-size) - 1px);
   font-family: 'Poppins', sans-serif;
   color: var(--main-text-color);
   caret-color: var(--primary);
@@ -399,7 +399,7 @@ span, p {
 
 /*#region Helpers*/
 .d_flex {
-  display: flex;
+  display: flex !important;
 }
 
 .d_inline_flex {
@@ -550,6 +550,15 @@ span, p {
   color: #1b1b1b;
 }
 
+.btn.danger:not(.flat) {
+  color: white;
+  background-color: var(--danger);
+}
+
+.btn.danger.flat {
+  color: var(--danger);
+}
+
 .btn.flat.secondary {
   color: var(--secondary);
 }
@@ -591,3 +600,19 @@ span, p {
 }
 
 /*#endregion BackdropStyle*/
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+
+@keyframes slide {
+  0% {
+    right: calc(100% - 80px);
+  }
+  100% {
+    right: 0;
+  }
+}

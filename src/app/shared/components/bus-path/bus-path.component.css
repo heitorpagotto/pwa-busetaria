@@ -2,11 +2,15 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  padding: 3rem 0;
+  padding: 5rem 2rem;
+}
+
+.card {
+  box-sizing: border-box;
 }
 
 .line {
-  border: 2px dashed black;
+  border: 1.75px dashed rgb(100, 100, 100);
 }
 
 .destination_pin {
@@ -14,8 +18,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  right: -3rem;
-  top: 0;
+  align-items: center;
+  top: 50%;
+  right: 0;
+  z-index: 0;
+  transform: translateY(-58%);
+}
+
+.destination_pin img {
+  position: relative;
+  right: -1.5rem;
+  width: 50px;
 }
 
 .destination_pin span {
@@ -25,11 +38,72 @@
   font-size: calc(var(--default-font-size) + 2px);
 }
 
+.user_pin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.user_pin img {
+  width: 35px;
+  position: relative;
+  top: -1rem;
+}
+
 .tooltip {
   background-color: rgba(0, 0, 0, 0.75);
   color: white;
   font-weight: 400;
-  font-size: calc(var(--default-font-size) - 2px);
+  font-size: calc(var(--default-font-size) + 1px);
   padding: 0.25rem 0.5rem;
   border-radius: 8px;
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom_tooltip {
+  background-color: rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  font-size: calc(var(--default-font-size) - 2px);
+  white-space: nowrap;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bus_wrapper {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  z-index: 1;
+}
+
+.bus_container img {
+  width: 80px;
+  animation: 150ms updown linear infinite;
+}
+
+.bus_container {
+  position: relative;
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-1px);
+  }
 }

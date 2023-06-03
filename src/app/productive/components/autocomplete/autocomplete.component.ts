@@ -15,6 +15,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import {NgModel} from "@angular/forms";
 
 const animation = trigger('openMenu', [
   transition(':enter', [
@@ -69,6 +70,8 @@ export class AutocompleteComponent
   public searchValueChange: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   public scrolled: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input()
+  public required: boolean = false;
 
   public isMenuOpen: boolean = false;
   public dataArrayBackup: any[] = [];
@@ -77,6 +80,8 @@ export class AutocompleteComponent
   private _menu?: ElementRef<HTMLElement>;
   @ViewChild('fieldset')
   private _fieldset?: ElementRef<HTMLElement>;
+  @ViewChild('model')
+  public model: NgModel;
 
   constructor(
     private _renderer2: Renderer2,

@@ -2,11 +2,26 @@
   <div class="main_card">
     <p-autocomplete [dataArray]="addresses" (selectedData)="selectAddress($event, 'first')" [showProp]="'street'"
                     fieldsetLabel="Me diga, onde você está?"
-                    placeholder="Selecione"></p-autocomplete>
+                    [required]="true"
+                    [fielsetPlaceholder]="'Selecione...'"
+                    #firstAddress
+                    placeholder="Selecione">
+      <ng-container p-prefix>
+        <img alt="Location Start" src="./assets/busetaria-icons/location-start.svg" style="opacity: 0.5">
+      </ng-container>
+    </p-autocomplete>
     <p-autocomplete [dataArray]="addresses" [showProp]="'street'" (selectedData)="selectAddress($event, 'second')"
                     fieldsetLabel="E para onde deseja ir?"
-                    placeholder="Selecione"></p-autocomplete>
+                    [fielsetPlaceholder]="'Selecione...'"
+                    [required]="true"
+                    #secondAddress
+                    placeholder="Selecione">
+      <ng-container p-prefix>
+        <img alt="Location End" src="./assets/busetaria-icons/location-end.svg" style="opacity: 0.5">
+      </ng-container>
+    </p-autocomplete>
     <button class="btn w-100 elevated primary-b" (click)="nextPage()" pRipple>
+      <img src="./assets/busetaria-icons/location-search.svg" style="margin-right: 1rem;" alt="Location Search">
       Pesquisar Ônibus
     </button>
   </div>

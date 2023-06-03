@@ -12,6 +12,7 @@ import {UserModel} from "../../../../shared/models/user.model";
         </a>
         <button class="btn small" [routerLink]="['/auth/login']" pRipple *ngIf="!loggedUser">
           Entrar
+          <i class="bi bi-box-arrow-in-right" style="margin-left: 1rem"></i>
         </button>
         <ng-container *ngIf="loggedUser">
           <button class="btn small flat inverted" [routerLink]="['/user/profile']">

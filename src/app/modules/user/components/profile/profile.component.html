@@ -1,1 +1,35 @@
-<p>profile works!</p>
+<div class="main_wrapper">
+  <div class="user_options_container">
+    <button class="btn" style="margin-bottom: 2rem;" [routerLink]="['/']" pRipple>
+      <i class="bi bi-arrow-left" style="margin-right: 1rem;"></i>
+      Voltar
+    </button>
+    <div class="user_icon">
+      <i class="bi bi-person-circle"></i>
+    </div>
+    <div class="d_flex flex_column">
+      <button class="btn danger" pRipple style="margin-bottom: 1rem" (click)="logOut()">
+        <i class="bi bi-box-arrow-left" style="margin-right: 1rem;"></i>
+        Sair
+      </button>
+
+    </div>
+  </div>
+  <div class="input_container">
+    <form [formGroup]="userForm" (ngSubmit)="saveUserInfo()">
+      <p-fieldset label="Nome">
+        <input type="text" formControlName="name">
+      </p-fieldset>
+      <p-fieldset label="Email">
+        <input type="email" formControlName="email">
+      </p-fieldset>
+      <p-fieldset label="Telefone">
+        <input type="text" formControlName="phone">
+      </p-fieldset>
+      <button class="btn primary w_100" pRipple type="submit">
+        <i class="bi bi-save" style="margin-right: 1rem;"></i>
+        Salvar Alterações
+      </button>
+    </form>
+  </div>
+</div>

@@ -16,7 +16,10 @@ export class BusLineComponent implements OnInit, OnDestroy {
   public busRoutes: BusModel[] = [];
   public selectedBusRoute: BusModel;
   public screenStatus: ScreenStatus = 'no-embark';
+  public initialBusTime: number;
+  public animated: boolean = true;
 
+  private _timeout: any;
   private _subtractInterval: Subscription;
 
   constructor(private _router: Router) {
@@ -33,11 +36,11 @@ export class BusLineComponent implements OnInit, OnDestroy {
         this.addresses = JSON.parse(storedAddress) as BusPageModel;
         this._generateBus();
       } else {
-        this._router.navigate(['/'])
+        this.navigateBack();
       }
     } catch (error: any) {
       console.log(error);
-      this._router.navigate(['/'])
+      this.navigateBack();
     }
   }
 
@@ -47,7 +50,8 @@ export class BusLineComponent implements OnInit, OnDestroy {
       destination: this.addresses.secondAddress,
       personQty: 35,
       start: this.addresses.firstAddress,
-      timeToArrive: 750020,
+      //timeToArrive: 580020,
+      timeToArrive: 10000,
       totalSeats: 50,
       traffic: ETraffic.GOOD
     }
@@ -56,7 +60,7 @@ export class BusLineComponent implements OnInit, OnDestroy {
       destination: this.addresses.secondAddress,
       personQty: 20,
       start: this.addresses.firstAddress,
-      timeToArrive: 1820050,
+      timeToArrive: 1820000,
       totalSeats: 50,
       traffic: ETraffic.MEDIUM
     }
@@ -75,11 +79,28 @@ export class BusLineComponent implements OnInit, OnDestroy {
     }
   }
 
+  public changeScreenType(screen: ScreenStatus): void {
+    this.screenStatus = screen;
+    if (this.screenStatus === 'embarked') {
+      this.selectedBusRoute.personQty++;
+    }
+    if (this.screenStatus === 'finished') {
+      this.animated = false;
+      this.selectedBusRoute.timeToArrive = 0;
+      this._timeout = setTimeout(() => {
+        this.navigateBack();
+      }, 5000)
+    }
+  }
+
   public selectBusRoute(route: BusModel): void {
+    this.initialBusTime = route.timeToArrive;
     if (this.selectedBusRoute) {
       this.busRoutes.push(this.selectedBusRoute);
     }
+
     this.selectedBusRoute = route;
+    this.animated = false;
     const idx = this.busRoutes.findIndex(x => x == route);
     if (idx >= 0) {
       this.busRoutes.splice(idx, 1);
@@ -89,10 +110,22 @@ export class BusLineComponent implements OnInit, OnDestroy {
     this.busRoutes = this.busRoutes.sort((a, b) => trafficOrder.indexOf(a.traffic) - trafficOrder.indexOf(b.traffic))
 
     if (this._subtractInterval) this._subtractInterval.unsubscribe();
-
+    setTimeout(() => {
+      this.animated = true;
+    }, 0)
     this._subtractInterval = interval(1000).subscribe((e) => {
       if (this.selectedBusRoute.timeToArrive > 0) {
         this.selectedBusRoute.timeToArrive -= 1000
+      }
+      if (this.selectedBusRoute.timeToArrive <= 0) {
+        this.selectedBusRoute.timeToArrive = 0;
+      }
+
+      if (this.selectedBusRoute.timeToArrive === (this.initialBusTime / 2) && this.screenStatus === 'no-embark') {
+        this.changeScreenType('embarked');
+      }
+      if (this.selectedBusRoute.timeToArrive === 0) {
+        this.changeScreenType('finished');
       }
     });
   }
@@ -100,6 +133,7 @@ export class BusLineComponent implements OnInit, OnDestroy {
   public navigateBack(): void {
     this._router.navigate(['/']);
     sessionStorage.removeItem('addresses');
+    window.clearTimeout(this._timeout);
   }
 
   public ngOnDestroy(): void {

@@ -1,6 +1,9 @@
 <p-fieldset [label]="fieldsetLabel" [class.darkMode]="darkMode">
+  <div prefix>
+    <ng-content select="[p-prefix]"></ng-content>
+  </div>
   <input [ngModel]="searchValue" (ngModelChange)="searchAutoComplete($event)" type="text" (focus)="openMenu()" #fieldset
-         placeholder="{{fielsetPlaceholder}}">
+         placeholder="{{fielsetPlaceholder}}" [required]="required" #model="ngModel">
 </p-fieldset>
 
 <div class="auto_complete_wrapper" #menu>

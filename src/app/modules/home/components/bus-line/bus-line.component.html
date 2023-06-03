@@ -9,7 +9,7 @@
         <div class="info_card_header">
           <span>Linha</span>
         </div>
-        <span>ICON</span>
+        <img src="./assets/busetaria-icons/line.svg" alt="Linha Icon" width="100px">
         <div class="info_card_footer">
           <span>{{selectedBusRoute.line}}</span>
         </div>
@@ -18,7 +18,7 @@
         <div class="info_card_header">
           <span>Ponto Inicial</span>
         </div>
-        <span>ICON</span>
+        <img src="./assets/busetaria-icons/location.svg" alt="Location Icon" width="100px">
         <div class="info_card_footer">
           <span>{{addresses.firstAddress.neighborhood}}</span>
         </div>
@@ -27,49 +27,74 @@
         <div class="info_card_header">
           <span>Ponto Final</span>
         </div>
-        <span>ICON</span>
+        <img src="./assets/busetaria-icons/end-flag.svg" alt="Final Icon" width="100px">
         <div class="info_card_footer">
           <span>{{addresses.secondAddress.busStop}}</span>
         </div>
       </div>
     </div>
     <div>
-      <app-bus-path></app-bus-path>
+      <app-bus-path [peopleQty]="selectedBusRoute.personQty"
+                    [timeToArrive]="initialBusTime"
+                    [animated]="animated"
+                    [hasEmbarked]="screenStatus === 'embarked'"
+                    [isPastHalfwayPoint]="selectedBusRoute.timeToArrive <= (this.initialBusTime / 2)"
+                    [isComplete]="selectedBusRoute.timeToArrive === 0"></app-bus-path>
     </div>
     <div class="card_row">
-      <div class="card filled">
+      <div class="card filled" [class.GOOD]="selectedBusRoute.timeToArrive === 0">
         <div class="info_card_header">
-          <span>O ônibus chega em</span>
+          <span *ngIf="selectedBusRoute.timeToArrive > 0">O ônibus chega em</span>
+          <span *ngIf="selectedBusRoute.timeToArrive === 0">Você chegou!</span>
         </div>
-        <span>ICON</span>
+        <img *ngIf="selectedBusRoute.timeToArrive > 0" src="./assets/busetaria-icons/clock.svg" alt="Clock Icon"
+             width="100px">
+        <img *ngIf="selectedBusRoute.timeToArrive === 0" src="./assets/busetaria-icons/checkmark.svg"
+             alt="Checkmark Icon" width="100px">
         <div class="info_card_footer">
           <span>{{selectedBusRoute.timeToArrive | msToTime}}</span>
         </div>
       </div>
-      <div class="card filled">
+      <div class="card filled" *ngIf="screenStatus === 'no-embark'">
         <div class="info_card_header">
           <span>Ainda Restam</span>
         </div>
-        <span>ICON</span>
+        <img src="./assets/busetaria-icons/bus-seats.svg" alt="Seats Icon" width="100px">
         <div class="info_card_footer">
           <span>{{selectedBusRoute.totalSeats - selectedBusRoute.personQty}} Assentos</span>
         </div>
       </div>
       <div class="card filled">
         <div class="info_card_header">
-          <span>Aguarde no Ponto</span>
+          <span *ngIf="screenStatus === 'no-embark'">Aguarde no Ponto</span>
+          <span *ngIf="screenStatus !== 'no-embark'">Desça no Ponto</span>
         </div>
-        <span>ICON</span>
+        <img src="./assets/busetaria-icons/bus-stop.svg" alt="Stop Icon" width="100px">
         <div class="info_card_footer">
-          <span>{{addresses.firstAddress.busStop}}</span>
+          <span *ngIf="screenStatus === 'no-embark'">{{addresses.firstAddress.busStop}}</span>
+          <span *ngIf="screenStatus !== 'no-embark'">{{addresses.secondAddress.busStop}}</span>
         </div>
       </div>
     </div>
     <div style="margin-top: 1rem">
-      <button class="btn primary-b large w_100 elevated" pRipple>Embarquei no Ônibus</button>
+      <button class="btn primary-b large w_100 elevated" (click)="changeScreenType('embarked')"
+              *ngIf="screenStatus === 'no-embark'" pRipple>
+        <img src="./assets/busetaria-icons/bus-ticket.svg" style="margin-right: 1rem" alt="Ticket Icon" width="40px">
+        Embarquei no Ônibus
+      </button>
+      <button class="btn primary-b large w_100 elevated" (click)="changeScreenType('finished')"
+              *ngIf="screenStatus === 'embarked'" pRipple>
+        <img src="./assets/busetaria-icons/end-flag.svg" style="margin-right: 1rem" alt="End Flag Icon" width="40px">
+        Cheguei no Ponto!
+      </button>
+      <button class="btn primary-b large w_100 elevated" *ngIf="screenStatus === 'finished'" (click)="navigateBack()"
+              pRipple>
+        <img src="./assets/busetaria-icons/home.svg" style="margin-right: 1rem" alt="Home Icon" width="40px">
+        Tela Inicial
+      </button>
     </div>
   </div>
-  <div style="padding: 1rem 0">
+  <div style="padding: 1rem 0" *ngIf="screenStatus === 'no-embark'">
     <div>
       <h5>Rotas Alternativas</h5>
     </div>
@@ -79,14 +104,30 @@
         <div class="card-content">
           <div class="information_row">
             <div class="information_item">
-              <span>Linha: {{route.line}}</span>
-              <span>{{route.totalSeats - route.personQty}} Assentos</span>
+              <div class="d_flex align_items_center" style="margin-bottom: 2rem">
+                <img src="./assets/busetaria-icons/line.svg" alt="Line Icon" width="35px" style="margin-right: 1rem;">
+                <span>Linha: {{route.line}}</span>
+              </div>
+              <div class="d_flex align_items_center">
+                <img src="./assets/busetaria-icons/bus-seats.svg" alt="Seats Icon" width="35px"
+                     style="margin-right: 1rem;">
+                <span>{{route.totalSeats - route.personQty}} Assentos</span>
+              </div>
             </div>
             <div class="information_item">
-              <span>Chegara em {{route.timeToArrive | msToTime}}</span>
-              <span *ngIf="route.traffic === 'GOOD'">Tráfego Bom</span>
-              <span *ngIf="route.traffic === 'MEDIUM'">Tráfego Moderado</span>
-              <span *ngIf="route.traffic === 'BAD'">Tráfego Ruim</span>
+              <div class="d_flex align_items_center" style="margin-bottom: 2rem">
+                <img src="./assets/busetaria-icons/clock.svg" alt="Clock Icon"
+                     width="30px" style="margin-right: 1rem">
+                <span>Chegará em {{route.timeToArrive | msToTime}}</span>
+              </div>
+              <div class="d_flex align_items_center">
+                <img src="./assets/busetaria-icons/traffic-light.svg" width="30px" alt="Traffic Lights Icon"
+                     style="margin-right: 1rem">
+                <span *ngIf="route.traffic === 'GOOD'">Tráfego Bom</span>
+                <span *ngIf="route.traffic === 'MEDIUM'">Tráfego Moderado</span>
+                <span *ngIf="route.traffic === 'BAD'">Tráfego Ruim</span>
+              </div>
+
             </div>
           </div>
         </div>

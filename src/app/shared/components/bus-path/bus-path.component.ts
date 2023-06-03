@@ -8,4 +8,14 @@ import {Component, Input} from '@angular/core';
 export class BusPathComponent {
   @Input()
   public peopleQty: number = 50;
+  @Input()
+  public timeToArrive: number = 0;
+  @Input()
+  public animated: boolean;
+  @Input()
+  public isPastHalfwayPoint: boolean = false;
+  @Input()
+  public hasEmbarked: boolean = false;
+  @Input()
+  public isComplete: boolean = false;
 }

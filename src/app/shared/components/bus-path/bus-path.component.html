@@ -1,15 +1,18 @@
 <div class="wrapper">
-  <div>
-    <div>
-      <img src="" alt="BUSÃO">
+
+  <div class="bus_wrapper" [style]="animated ? 'animation: '+timeToArrive+'ms slide linear;' : 'animation: none'">
+    <div class="bus_container">
+      <img src="./assets/busetaria-icons/bus.svg" alt="Bus Icon">
       <span class="tooltip">{{peopleQty}}/50</span>
+      <span class="bottom_tooltip" *ngIf="hasEmbarked">Você está aqui</span>
     </div>
   </div>
-  <!--  <div class="user_pin">-->
-  <!--    <span>Você está aqui</span>-->
-  <!--  </div>-->
+  <div class="user_pin" *ngIf="!isPastHalfwayPoint && !hasEmbarked">
+    <img src="./assets/busetaria-icons/user-location.svg" alt="Location User Icon">
+    <span>Você está aqui</span>
+  </div>
   <div class="destination_pin">
-    <img src="" alt="PONTO FINAL LOGO">
+    <img src="./assets/busetaria-icons/end-flag.svg" alt="Final Stop Icon">
     <span>Ponto Final</span>
   </div>
   <div class="line"></div>

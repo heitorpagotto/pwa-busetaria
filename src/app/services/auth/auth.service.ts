@@ -23,6 +23,11 @@ export class AuthService {
     return false;
   }
 
+  public logout(): boolean {
+    sessionStorage.removeItem('loggedUser');
+    return true;
+  }
+
   public register(model: UserModel): boolean {
     const usersString: string | null = sessionStorage.getItem('users');
     if (usersString) {
