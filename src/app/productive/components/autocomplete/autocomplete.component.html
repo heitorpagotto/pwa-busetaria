@@ -4,12 +4,14 @@
   </div>
   <input [ngModel]="searchValue" (ngModelChange)="searchAutoComplete($event)" type="text" (focus)="openMenu()" #fieldset
          placeholder="{{fielsetPlaceholder}}" [required]="required" #model="ngModel">
+  <i class="bi bi-chevron-down" suffix></i>
 </p-fieldset>
 
 <div class="auto_complete_wrapper" #menu>
   <div *ngIf="isMenuOpen" class="auto_complete_menu elevation-p2" @openMenu>
     <div class="auto_complete_content">
       <button *ngFor="let option of dataArrayBackup" (click)="selectOption(option)">
+        <img src="./assets/busetaria-icons/location.svg" alt="Location Icon" style="margin-right: 1rem" width="30px">
         {{option[showProp]}}
       </button>
       <span class="no_show_text" *ngIf="!dataArrayBackup || dataArrayBackup?.length === 0">

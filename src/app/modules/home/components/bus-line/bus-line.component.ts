@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {BusPageModel} from "../../../../shared/models/bus-page.model";
 import {Router} from "@angular/router";
 import {BusModel} from "../../../../shared/models/bus.model";
@@ -26,6 +26,7 @@ export class BusLineComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    window.clearTimeout(this._timeout);
     this.getParsedAddresses();
   }
 
@@ -85,6 +86,7 @@ export class BusLineComponent implements OnInit, OnDestroy {
       this.selectedBusRoute.personQty++;
     }
     if (this.screenStatus === 'finished') {
+      this._subtractInterval.unsubscribe();
       this.animated = false;
       this.selectedBusRoute.timeToArrive = 0;
       this._timeout = setTimeout(() => {
@@ -131,13 +133,18 @@ export class BusLineComponent implements OnInit, OnDestroy {
   }
 
   public navigateBack(): void {
+    window.clearTimeout(this._timeout);
     this._router.navigate(['/']);
     sessionStorage.removeItem('addresses');
-    window.clearTimeout(this._timeout);
   }
 
   public ngOnDestroy(): void {
     this._subtractInterval?.unsubscribe();
+  }
+
+  @HostListener('window:resize')
+  public isMobile(): boolean {
+    return window.innerWidth <= 768;
   }
 }
 
