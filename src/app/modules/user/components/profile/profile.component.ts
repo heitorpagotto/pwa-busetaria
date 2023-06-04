@@ -3,6 +3,7 @@ import {AuthService} from "../../../../services/auth/auth.service";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserModel} from "../../../../shared/models/user.model";
+import {NotificationService} from "../../../../services/notification/notification.service";
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import {UserModel} from "../../../../shared/models/user.model";
 export class ProfileComponent implements OnInit {
   public userForm: FormGroup;
 
-  constructor(private _authService: AuthService, private _router: Router) {
+  constructor(private _authService: AuthService, private _router: Router, private _notificationService: NotificationService) {
   }
 
   public ngOnInit(): void {
@@ -60,6 +61,7 @@ export class ProfileComponent implements OnInit {
 
         sessionStorage.setItem('loggedUser', JSON.stringify(userParsed));
         sessionStorage.setItem('users', JSON.stringify(userListParsed));
+        this._notificationService.showSuccess('Alterações salvas com sucesso!')
       }
     } else {
       this.userForm.markAllAsTouched();

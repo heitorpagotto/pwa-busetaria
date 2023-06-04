@@ -2,6 +2,7 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../services/auth/auth.service";
 import {Router} from "@angular/router";
+import {NotificationService} from "../../../../services/notification/notification.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   public loginForm?: FormGroup;
 
-  constructor(private _authService: AuthService, private _router: Router) {
+  constructor(private _authService: AuthService, private _router: Router, private _notificationService: NotificationService) {
   }
 
   public ngOnInit(): void {
@@ -22,10 +23,10 @@ export class LoginComponent implements OnInit {
     if (this.loginForm?.valid) {
       const loggedIn = this._authService.login(this.loginForm.value);
       if (loggedIn) {
-        // TODO: Implementar toast de sucesso
+        this._notificationService.showSuccess('Autenticado com sucesso!');
         this._router.navigate(['/']);
       } else {
-        // TODO: Implementar toast de Usuário ou Senha incorretos
+        this._notificationService.showError('Usuário ou Senha incorretos');
       }
     } else {
       this.loginForm?.markAllAsTouched();

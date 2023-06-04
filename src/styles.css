@@ -689,21 +689,6 @@ img {
 
 
 /*#region Snackbar*/
-.snack_success {
-  background-color: green;
-  color: white;
-}
-
-.snack_error {
-  background-color: var(--danger);
-  color: white;
-}
-
-.snack_warning {
-  background-color: #ffc400;
-  color: black;
-}
-
 .p-snackbar-wrapper {
   position: fixed;
   padding: 2rem;
@@ -760,6 +745,21 @@ img {
   100% {
     opacity: 0;
   }
+}
+
+.snack_success {
+  background-color: green;
+  color: white;
+}
+
+.snack_error {
+  background-color: var(--danger);
+  color: white;
+}
+
+.snack_warning {
+  background-color: #ffc400;
+  color: black;
 }
 
 /*#endregion Snackbar*/

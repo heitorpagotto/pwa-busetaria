@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../services/auth/auth.service";
 import {LoginRequestModel} from "../../../../shared/models/login-request.model";
 import {Router} from "@angular/router";
+import {NotificationService} from "../../../../services/notification/notification.service";
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit {
   public registerForm?: FormGroup;
 
-  constructor(private _authService: AuthService, private _router: Router) {
+  constructor(private _authService: AuthService, private _router: Router, private _notificationService: NotificationService) {
   }
 
   public ngOnInit(): void {
@@ -37,13 +38,13 @@ export class RegisterComponent implements OnInit {
         loginReq.passWord = this.registerForm.get('passWord')!.value;
         const loggedIn = this._authService.login(loginReq);
         if (loggedIn) {
-          // TODO: implementar toast de sucesso
+          this._notificationService.showSuccess('Registrado com Sucesso!');
           this._router.navigate(['/']);
         } else {
-          // TODO: implementar toast de erro
+          this._notificationService.showError('Erro ao autenticar. Tente novamente');
         }
       } else {
-        // TODO: implementar toast de erro
+        this._notificationService.showError('Erro ao cadastrar. Tente novamente');
       }
     } else {
       this.registerForm?.markAllAsTouched();

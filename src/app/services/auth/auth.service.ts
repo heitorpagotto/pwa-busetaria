@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {LoginRequestModel} from "../../shared/models/login-request.model";
 import {UserModel} from "../../shared/models/user.model";
+import {NotificationService} from "../notification/notification.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() {
+  constructor(private _notificationService: NotificationService) {
   }
 
   public login(model: LoginRequestModel): boolean {
@@ -33,6 +34,11 @@ export class AuthService {
     if (usersString) {
       const userParsed: UserModel[] = JSON.parse(usersString);
       const newId = userParsed.length + 1;
+
+      if (userParsed.findIndex(x => x.name === model.name || x.email === model.email || x.phone === model.phone)) {
+        this._notificationService.showError('Usuário já cadastrado.');
+        return false;
+      }
 
       model.id = newId;
       userParsed.push(model);
