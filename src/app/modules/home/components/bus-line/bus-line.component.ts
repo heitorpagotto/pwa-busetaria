@@ -51,8 +51,7 @@ export class BusLineComponent implements OnInit, OnDestroy {
       destination: this.addresses.secondAddress,
       personQty: 35,
       start: this.addresses.firstAddress,
-      //timeToArrive: 580020,
-      timeToArrive: 10000,
+      timeToArrive: 100000,
       totalSeats: 50,
       traffic: ETraffic.GOOD
     }
