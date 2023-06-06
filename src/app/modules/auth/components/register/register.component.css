@@ -9,3 +9,10 @@
 .card {
   width: 500px;
 }
+
+@media screen and (max-width: 600px) {
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

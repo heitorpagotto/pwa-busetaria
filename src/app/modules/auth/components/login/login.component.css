@@ -10,6 +10,13 @@
   width: 500px;
 }
 
+@media screen and (max-width: 600px) {
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 .sign_up_container {
   margin-top: 1rem;
   padding: 1rem;

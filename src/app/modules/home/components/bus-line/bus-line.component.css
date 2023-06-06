@@ -93,3 +93,17 @@
     font-size: calc(var(--default-font-size) + 2px);
   }
 }
+
+@media screen and (max-width: 420px) {
+  .card_row .card {
+    width: 180px;
+    min-height: 180px;
+  }
+}
+
+@media screen and (max-width: 362px) {
+  .card_row .card {
+    width: 150px;
+    min-height: 150px;
+  }
+}

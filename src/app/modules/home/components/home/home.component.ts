@@ -3,6 +3,7 @@ import {AddressModel} from "../../../../shared/models/address.model";
 import {BusPageModel} from "../../../../shared/models/bus-page.model";
 import {Router} from "@angular/router";
 import {AutocompleteComponent} from "../../../../productive/components/autocomplete/autocomplete.component";
+import {NotificationService} from "../../../../services/notification/notification.service";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   public addresses: AddressModel[] = [];
   public selectedAddress: BusPageModel = new BusPageModel();
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _notificationService: NotificationService) {
   }
 
   @ViewChild('firstAddress')
@@ -75,6 +76,8 @@ export class HomeComponent implements OnInit {
       if (this.selectedAddress.firstAddress !== this.selectedAddress.secondAddress) {
         sessionStorage.setItem('addresses', JSON.stringify(this.selectedAddress));
         this._router.navigate(['/bus-line'])
+      } else {
+        this._notificationService.showError('Selecione endereços diferentes!');
       }
     }
   }

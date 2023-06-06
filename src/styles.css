@@ -269,7 +269,7 @@ h6 {
 span, p {
   font-size: var(--default-font-size);
   font-family: 'Roboto', sans-serif;
-  line-height: var(--default-font-size);
+  line-height: calc(var(--default-font-size) + 5px);
   font-weight: 500;
 }
 

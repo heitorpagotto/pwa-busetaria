@@ -28,6 +28,7 @@
 @media screen and (max-width: 768px) {
   .main_wrapper {
     flex-direction: column;
+    height: auto;
   }
 
   .user_options_container {
@@ -39,3 +40,4 @@
     width: 100%;
   }
 }
+
